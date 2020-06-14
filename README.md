@@ -34,7 +34,7 @@ Paweł Sikora,Mateusz Sitek:
 Paweł Szydło, Bartosz Szlęzak:
 -Wyświetlanie opisów/pomocy klawiszy skrótów na wyświetlaczu LCD
 
-Jakub Medalion,Paweł Sitek:
+Jakub Medalion,Mateusz Rychlik:
 -Wyświetlanie na diodzie RGB panelu bieżącego uśrednionego koloru strumienia video odtwarzanego na hoście
 					
 Uwaga:

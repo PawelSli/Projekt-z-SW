@@ -240,7 +240,7 @@ public class Board {
                 int pot;
                 String buffer1;
                 int temp;
-                while (true){
+                while (!skt.isClosed()){
                     pot=potencjometr1.getValue();
                     System.out.println("Wysylam wartosc: "+pot+"\n");
                     myOutput.print(Integer.toString(pot)+"\n");
@@ -339,7 +339,7 @@ public class Board {
                 String buffer2;
                 String buffer3;
 
-                while(true){
+                while(!skt.isClosed()){
 
                     buffer1=myInput.readLine();
                     tks1.setText("Temperatura(C)");
@@ -407,7 +407,7 @@ public class Board {
                         myOutput.print(8+"\n");
                     }
                 });
-                while(true){
+                while(!skt.isClosed()){
                     bufor1=myInput.readLine();
                     temp=Integer.parseInt(bufor1);
                     if(temp==1){
@@ -441,7 +441,7 @@ public class Board {
 
                 String buffer1,buffer2,buffer3;
                 int temp1,temp2,temp3;
-                while (true){
+                while (!skt.isClosed()){
                     buffer1=myInput.readLine();
                     temp1=Integer.parseInt(buffer1);
                     buffer2=myInput.readLine();

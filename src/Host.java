@@ -45,7 +45,7 @@ public class Host{
                 System.out.println("Wybrano projekt nr 1 i 2");
                 String tmpLine = "";
                 System.out.println("Dostalem sie do dzwieku!");
-                while (true) {
+                while (!skt.isClosed()) {
                     userInput=myinput.readLine();
                     System.out.println(userInput);
                     try 
@@ -106,7 +106,7 @@ public class Host{
                 String line4;
                 double ram;
 
-                while(true) {
+                while(!skt.isClosed()) {
 
                     temp = Runtime.getRuntime().exec(new String[]{"bash", "-c", "cat /sys/class/thermal/thermal_zone0/temp"});
                     total = Runtime.getRuntime().exec(new String[]{"bash", "-c", "free | grep Mem | cut -d \" \" -f8"});
@@ -144,7 +144,7 @@ public class Host{
                 String buffer1;
                 int temp;
                 myoutput.print("3\n");
-                while(true){
+                while(!skt.isClosed()){
                     buffer1=myinput.readLine();
                     temp=Integer.parseInt(buffer1);
                     if(temp==1){
@@ -244,7 +244,7 @@ public class Host{
                     int rgb;
                     Color color;
                     BufferedImage imgSection;
-                    while (true) {
+                    while (!skt.isClosed()) {
                         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                         X_RES = screenSize.width;
                         Y_RES = screenSize.height;
