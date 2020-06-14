@@ -255,8 +255,8 @@ public class Board {
                         led5.setBackground(Color.GREEN);
                         led6.setBackground(Color.GREEN);
                         led7.setBackground(Color.GREEN);
-                    }
-                    if(temp>=87.5){
+                    
+                    }else if(temp>=87.5){
                         led0.setBackground(Color.GREEN);
                         led1.setBackground(Color.GREEN);
                         led2.setBackground(Color.GREEN);
