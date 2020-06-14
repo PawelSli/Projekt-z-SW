@@ -39,25 +39,30 @@ public class Board {
     static JButton s8;
 
     static JPanel rbg_diod;
+    static JFrame jFrame;
 
     public Board(){
 
 
-        JFrame jFrame=new JFrame("Płytka ewaluacyjna");
+        jFrame=new JFrame("Projekt - Systemy wbudowane");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setSize(800,500);
+        jFrame.setSize(720,450);
         jFrame.setLayout(new GridLayout(3,2));
         jFrame.setBackground(Color.RED);
 
-        JTextArea tekst1=new JTextArea("");
+        JTextArea tekst1=new JTextArea(
+                "Symulator płytki ewaluacyjnej:\nEvB 5.1 ");
+        tekst1.setFont(new Font("Opis",Font.CENTER_BASELINE,20));
         JPanel tekst2=new JPanel();
         tekst2.setBackground(Color.cyan);
         tekst2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         tekst2.setLayout(new GridLayout(2,0));
         tks1=new JTextArea("");
         tks1.setFont(new Font("LCD",Font.PLAIN,40));
+        tks1.setEditable(false);
         tks2=new JTextArea("");
         tks2.setFont(new Font("",Font.PLAIN,40));
+        tks2.setEditable(false);
         tekst2.add(tks1);
         tekst2.add(tks2);
         tks1.setBackground(Color.cyan);
@@ -144,8 +149,6 @@ public class Board {
         jFrame.add(tekst3);
         jFrame.add(tekst4);
         jFrame.add(tekst5);
-        //jFrame.add(tekst6);
-        //jFrame.add(tekst7);
         jFrame.add(tekst8);
         tekst8.setLayout(new GridLayout(3,0));
 
@@ -177,8 +180,6 @@ public class Board {
 
         empty1.add(pot1);
         empty1.add(potencjometr1);
-        empty2.add(pot2);
-        empty2.add(potencjometr2);
 
 
         s1=new JButton("s1");
@@ -216,7 +217,7 @@ public class Board {
         buttons.add(s7);
         buttons.add(s8);
 
-        jFrame.setResizable(true);
+        jFrame.setResizable(false);
         jFrame.setVisible(true);
     }
     public static void main(String args[]) throws IOException {
@@ -225,22 +226,16 @@ public class Board {
             ServerSocket myServerSocket=new ServerSocket(9999);
             System.out.println("Server is waiting for connection: "+InetAddress.getLocalHost().getCanonicalHostName()+", port= "+myServerSocket.getLocalPort());
             Socket skt=myServerSocket.accept();
-
+            skt.setReceiveBufferSize(8);
+            skt.setSendBufferSize(8);
             BufferedReader myInput=new BufferedReader(new InputStreamReader(skt.getInputStream()));
             PrintStream myOutput=new PrintStream(skt.getOutputStream());
             String buf=myInput.readLine();
             if(buf!=null){
                 System.out.println("Server read:"+buf);
-                //myOutput.print("Got it");
             }
 
             if(buf.equals("1")){
-
-                System.out.println("Kontrolowanie wyjscia audio hosta za pomoca potencjometru:");
-                //TA CZESC JEST W MIARE ZROBIONA, PASUJE JEDYNIE POPRAWIC WYSWIETLANIE OSTATNIEJ DIODY LED,
-                //ALE TO TEZ JEST OPCJONALNE
-
-
 
                 int pot;
                 String buffer1;
@@ -338,12 +333,7 @@ public class Board {
                     Thread.sleep(100);
                 }
 
-            }else if(buf.equals("3")){
-
-                /* WYSWIETLANIE OBCIAZENIA SYSTEMU HOSTA:*/
-                //TA STRONA ROWNIEZ NIE WYMAGA JAKIS WIELKICH MODYFIKACJI
-                //GLOWNIE PASUJE PO STRONIE KLIENTA DOSTOWSOWAC POBIERANIE WARTOSCI
-
+            }else if(buf.equals("2")){
 
                 String buffer1;
                 String buffer2;
@@ -364,13 +354,7 @@ public class Board {
                     tks2.setText(String.valueOf(buffer3));
                 }
 
-            }else if(buf.equals("4")){
-
-                /* KlAWISZE SKRÓTU:*/
-                //TEN ELEMENT PO TEJ STRONIE NIE WYMAGA WIELKICH MODYFIKACJI OPROCZ ZMIAN NAPISOW
-                //PO STRONIE HOSTA PASOWALOBY ZROBIC JAKIES KONKRETNE AKCJI NP. URUCHOMIENIE FIREFOXA, ITD.
-
-
+            }else if(buf.equals("3")){
 
                 String bufor1;
                 int temp;
@@ -423,8 +407,6 @@ public class Board {
                         myOutput.print(8+"\n");
                     }
                 });
-                /////////
-                ////////
                 while(true){
                     bufor1=myInput.readLine();
                     temp=Integer.parseInt(bufor1);
@@ -455,13 +437,7 @@ public class Board {
                     }
                 }
 
-            }else if(buf.equals("5")){
-
-                //PO TEJ STRONIE RACZEJ NIE TRZEBA MODYFIKACJI
-                //GLOWNE ZMIANY MUSZA ZAJSC W POBIERANIU USREDNIONYCH BARW PO STRONIE KLIENTA
-                /*WYSWIETLANIE KOLORU NA RGB*/
-
-
+            }else if(buf.equals("4")){
 
                 String buffer1,buffer2,buffer3;
                 int temp1,temp2,temp3;
@@ -477,14 +453,17 @@ public class Board {
             }
             skt.close();
             System.out.println("Server is exiting!");
-        }catch (IOException | InterruptedException exc){
+        }catch (SocketException exc){
+            System.out.println("Polaczenie z hostem zostalo zakonczone!");
+            jFrame.dispose();
+            System.exit(0);
+        }
+
+        catch (IOException | InterruptedException exc){
             exc.printStackTrace();
             System.out.println("Error!");
+            jFrame.dispose();
+            System.exit(0);
         }
-    }
-
-    void write(PrintWriter output,String message){
-        System.out.println("Sending: "+message);
-        output.println(message);
     }
 }
