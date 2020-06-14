@@ -51,7 +51,7 @@ public class Board {
         jFrame.setBackground(Color.RED);
 
         JTextArea tekst1=new JTextArea(
-                "Symulator płytki ewaluacyjnej:\nEvB 5.1 ");
+                "Symulator plytki ewaluacyjnej:\nEvB 5.1 ");
         tekst1.setFont(new Font("Opis",Font.CENTER_BASELINE,20));
         JPanel tekst2=new JPanel();
         tekst2.setBackground(Color.cyan);

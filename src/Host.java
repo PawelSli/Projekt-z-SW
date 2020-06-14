@@ -230,35 +230,29 @@ public class Host{
                 }
             }else if(i==4){
                 myoutput.print("4\n");
-                int SECT_SKIP=10;
+                int SECT_SKIP=5;
                 Robot robot;
                 try {
                     robot=new Robot();
                     Dimension screenSize;
                     BufferedImage screen;
-                    int X_RES;
-                    int Y_RES;
-                    int width,heigh;
+                    int width,height;
                     int r,g,b;
-                    int loops=0;
+                    int loops;
                     int rgb;
                     Color color;
-                    BufferedImage imgSection;
-                    while (!skt.isClosed()) {
+                    while (true) {
                         screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                        X_RES = screenSize.width;
-                        Y_RES = screenSize.height;
+                        width = screenSize.width;
+                        height = screenSize.height;
                         screen =robot.createScreenCapture(new Rectangle(screenSize));
-                        imgSection=screen.getSubimage(0,0,X_RES,Y_RES);
-                        width=imgSection.getWidth();
-                        heigh=imgSection.getHeight();
                         r=0;
                         g=0;
                         b=0;
                         loops=0;
                         for(int x=0;x<width;x+=SECT_SKIP){
-                            for(int y=0;y<heigh;y+=SECT_SKIP){
-                                rgb=imgSection.getRGB(x,y);
+                            for(int y=0;y<height;y+=SECT_SKIP){
+                                rgb=screen.getRGB(x,y);
                                 color=new Color(rgb);
                                 r+=color.getRed();
                                 g+=color.getGreen();
