@@ -1,4 +1,5 @@
 Jest to proste GUI oparte na socketach, które symuluje zachowanie się zadanej płytki ewaluacyjnej.
+https://github.com/PawelSli/Projekt-z-SW
 
 Schemat uruchomienia:
 
