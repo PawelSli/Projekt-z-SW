@@ -1,9 +1,13 @@
 Jest to proste GUI oparte na socketach, które symuluje zachowanie się zadanej płytki ewaluacyjnej.
 
 Schemat uruchomienia:
+
 javac Board.java
+
 javac Host.java
+
 java Board
+
 java Host
 
 Projekt został zrealizowany jako praca grupowa:
